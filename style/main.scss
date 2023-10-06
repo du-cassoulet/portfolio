@@ -9,97 +9,139 @@
 
 body {
 	overflow: hidden;
-}
 
-.page-container {
-	position: fixed;
-
-	.landing-page {
-		height: 100vh;
+	.bottom-button {
+		position: fixed;
+		z-index: 999;
+		bottom: 25px;
+		left: 50%;
+		transform: translateX(-50%);
+		background: #353535;
+		color: #ffffff;
+		border-radius: 50%;
+		height: 45px;
+		width: 45px;
 		display: flex;
-		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		border: none;
+		cursor: pointer;
+		user-select: all;
+		transition: 100ms ease;
 
-		.navbar {
-			width: 100vw;
-			padding: 15px;
-			display: flex;
-			align-items: center;
-			justify-content: right;
-
-			.avatar {
-				width: 40px;
-				height: 40px;
-				border-radius: 50%;
-				cursor: pointer;
-			}
+		.icon {
+			margin-top: 0px;
+			height: 20px;
+			width: 20px;
+			fill: #ffffff;
+			transition: 100ms ease;
 		}
 
-		.page-title {
-			margin: 200px 250px;
-			font-size: 75px;
-			font-weight: 700;
-			color: #ffffff;
-			font-family: "Paytone One", sans-serif;
-			line-height: 1;
-			cursor: default;
+		&:hover {
+			background: #2d2d2d;
 
-			.wave {
-				height: 100px;
-				width: 100px;
-				margin-right: 15px;
-				transition: 100ms ease;
-				transform: rotate(0deg);
+			.icon {
+				margin-top: 10px;
+			}
+		}
+	}
 
-				&:hover {
-					animation: wave 1s infinite ease-in-out;
-				}
+	.page-container {
+		position: fixed;
 
-				@keyframes wave {
-					0% {
-						transform: rotate(0deg);
-					}
+		.landing-page {
+			height: 100vh;
+			display: flex;
+			flex-direction: column;
 
-					50% {
-						transform: rotate(15deg);
-					}
+			.navbar {
+				width: 100vw;
+				padding: 15px;
+				display: flex;
+				align-items: center;
+				justify-content: right;
 
-					100% {
-						transform: rotate(0deg);
-					}
+				.avatar {
+					width: 40px;
+					height: 40px;
+					border-radius: 50%;
+					cursor: pointer;
 				}
 			}
 
-			.hello {
-				color: #fe435f;
-				font-family: "Paytone One", sans-serif;
-			}
-
-			.title-name {
-				font-size: 150px;
+			.page-title {
+				margin: 150px;
+				font-size: 75px;
+				font-weight: 700;
+				color: #ffffff;
 				font-family: "Paytone One", sans-serif;
 				line-height: 1;
-				position: relative;
-				color: #fe435f;
-				pointer-events: none;
+				cursor: default;
 
-				&::before {
-					content: "Gaston Chenet";
-					position: absolute;
-					top: 15px;
-					left: -10px;
-					color: #43fe91;
-					transition: 250ms ease;
+				.wave {
+					height: 100px;
+					width: 100px;
+					margin-right: 15px;
+					transition: 100ms ease;
+					transform: rotate(0deg);
+
+					&:hover {
+						animation: wave 750ms infinite ease-in-out;
+					}
+
+					@keyframes wave {
+						0% {
+							transform: rotate(0deg);
+						}
+
+						50% {
+							transform: rotate(15deg);
+						}
+
+						100% {
+							transform: rotate(0deg);
+						}
+					}
 				}
 
-				&::after {
-					content: "Gaston Chenet";
-					position: absolute;
-					top: 20px;
-					left: -5px;
-					color: #ffffff;
-					transition: 250ms ease;
+				.hello {
+					color: #fe435f;
+					font-family: "Paytone One", sans-serif;
+				}
+
+				.title-name {
+					font-size: 125px;
+					font-family: "Paytone One", sans-serif;
+					line-height: 1;
+					position: relative;
+					color: #5643fe;
+					pointer-events: none;
+
+					&::before {
+						content: attr(data-content);
+						position: absolute;
+						top: 15px;
+						left: -10px;
+						transition: 250ms ease;
+						color: #43fe97;
+					}
+
+					&::after {
+						content: attr(data-content);
+						position: absolute;
+						top: 20px;
+						left: -5px;
+						color: #ffffff;
+						transition: 250ms ease;
+					}
 				}
 			}
 		}
 	}
+}
+
+.brain {
+	position: fixed;
+	top: 0;
+	left: 0;
 }

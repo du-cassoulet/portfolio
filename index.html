@@ -5,6 +5,10 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Document</title>
 		<link rel="stylesheet" href="style/main.css" />
+		<script
+			src="https://kit.fontawesome.com/79d6801984.js"
+			crossorigin="anonymous"
+		></script>
 		<script type="importmap">
 			{
 				"imports": {
@@ -13,9 +17,20 @@
 				}
 			}
 		</script>
-		<script defer src="script/main.js" type="module"></script>
+		<script defer async src="script/main.js" type="module"></script>
 	</head>
 	<body>
+		<button class="bottom-button">
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				viewBox="0 0 448 512"
+				class="icon"
+			>
+				<path
+					d="M201.4 342.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 274.7 86.6 137.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"
+				/>
+			</svg>
+		</button>
 		<section class="page-container">
 			<article class="landing-page">
 				<nav class="navbar">
@@ -29,6 +44,7 @@
 					<img src="./assets/wave.png" alt="Waving Emoji" class="wave" />
 					<span class="hello">Hello,</span> my name is<br /><span
 						class="title-name"
+						data-content="Gaston Chenet"
 						>Gaston Chenet</span
 					>
 				</h1>

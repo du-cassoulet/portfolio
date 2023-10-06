@@ -1,4 +1,4 @@
-export const vertexShader = `#define PI 3.14159265359
+export const backgroundVertexShader = `#define PI 3.14159265359
 
 uniform float u_time;
 uniform float u_pointsize;
@@ -42,7 +42,7 @@ void main() {
   gl_Position = projectionMatrix * mvm;
 }`;
 
-export const fragmentShader = `#ifdef GL_ES
+export const backgroundFragmentShader = `#ifdef GL_ES
 precision mediump float;
 #endif
 
