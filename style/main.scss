@@ -5,6 +5,7 @@
 	padding: 0;
 	box-sizing: border-box;
 	font-family: "Rubik", sans-serif;
+	outline: none;
 }
 
 body {
@@ -25,14 +26,14 @@ body {
 		align-items: center;
 		justify-content: center;
 		border: none;
-		cursor: pointer;
 		user-select: all;
 		transition: 100ms ease;
+		cursor: pointer;
 
 		.icon {
-			margin-top: 0px;
-			height: 20px;
-			width: 20px;
+			margin-top: 5px;
+			height: 16px;
+			width: 16px;
 			fill: #ffffff;
 			transition: 100ms ease;
 		}
@@ -41,18 +42,20 @@ body {
 			background: #2d2d2d;
 
 			.icon {
-				margin-top: 10px;
+				margin-top: 15px;
 			}
 		}
 	}
 
 	.page-container {
 		position: fixed;
+		overflow-y: scroll;
+		max-height: 100vh;
 
-		.landing-page {
-			height: 100vh;
+		.page {
 			display: flex;
 			flex-direction: column;
+			height: 100vh;
 
 			.navbar {
 				width: 100vw;
@@ -65,7 +68,6 @@ body {
 					width: 40px;
 					height: 40px;
 					border-radius: 50%;
-					cursor: pointer;
 				}
 			}
 
@@ -76,18 +78,13 @@ body {
 				color: #ffffff;
 				font-family: "Paytone One", sans-serif;
 				line-height: 1;
-				cursor: default;
 
 				.wave {
 					height: 100px;
 					width: 100px;
 					margin-right: 15px;
 					transition: 100ms ease;
-					transform: rotate(0deg);
-
-					&:hover {
-						animation: wave 750ms infinite ease-in-out;
-					}
+					animation: wave 750ms infinite ease-in-out;
 
 					@keyframes wave {
 						0% {
@@ -140,8 +137,6 @@ body {
 	}
 }
 
-.bird {
-	position: fixed;
-	top: 0;
-	left: 0;
+.cube {
+	display: none;
 }

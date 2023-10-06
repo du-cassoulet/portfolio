@@ -85,43 +85,39 @@ import { backgroundFragmentShader, backgroundVertexShader } from "./shader.js";
 
 {
 	const scene = new THREE.Scene();
+	const canvas = document.querySelector("canvas.cube");
 
-	const renderer = new THREE.WebGLRenderer({ antialias: true });
+	const renderer = new THREE.WebGLRenderer({ antialias: true, canvas: canvas });
 	renderer.setPixelRatio(window.devicePixelRatio);
-	renderer.setSize(500, 500);
+	renderer.setSize(350, 350);
 	renderer.setClearColor(0x000000, 0);
 
 	const camera = new THREE.PerspectiveCamera(60, 1, 1, 100);
 
-	camera.position.set(0, 2.5, 2.5);
+	camera.position.set(0, 0, 3.5);
 	camera.updateProjectionMatrix();
 
 	const controls = new OrbitControls(camera, renderer.domElement);
 
 	const loader = new GLTFLoader();
-	const gltf = await loader.loadAsync("./3d/bird/scene.gltf");
-	const mixer = new THREE.AnimationMixer(gltf.scene);
-	mixer.clipAction(gltf.animations[0]).play();
+	const gltf = await loader.loadAsync("./3d/cube/scene.gltf");
 	scene.add(gltf.scene);
 
 	const light = new THREE.DirectionalLight(0xffffff, 1);
-	light.position.set(0, 50, 0);
+	light.position.set(0, 10, 0);
 	light.lookAt(0, 0, 0);
 	scene.add(light);
-
-	const container = document.body;
-	renderer.domElement.classList.add("bird");
-	container.appendChild(renderer.domElement);
 
 	controls.update();
 	renderer.render(scene, camera);
 
-	const clock = new THREE.Clock();
 	function animate() {
 		requestAnimationFrame(animate);
 
 		controls.update();
-		mixer.update(clock.getDelta());
+		gltf.scene.rotation.x += 0.005;
+		gltf.scene.rotation.z += 0.004;
+		gltf.scene.rotation.z += 0.002;
 		renderer.render(scene, camera);
 	}
 
