@@ -110,7 +110,7 @@ import { backgroundFragmentShader, backgroundVertexShader } from "./shader.js";
 	scene.add(light);
 
 	const container = document.body;
-	renderer.domElement.classList.add("brain");
+	renderer.domElement.classList.add("bird");
 	container.appendChild(renderer.domElement);
 
 	controls.update();
