@@ -50,5 +50,17 @@ uniform vec2 u_resolution;
 
 void main() {
   vec2 st = gl_FragCoord.xy / u_resolution.xy;
-  gl_FragColor = vec4(vec3(0.0, st), 1.0);
+
+  vec3 color;
+  vec3 color1 = vec3(0.263, 0.996, 0.592);
+  vec3 color2 = vec3(0.337, 0.263, 0.996);
+  vec3 color3 = vec3(0.051, 0.071, 0.078);
+
+  if (st.y < 0.5) {
+    color = mix(color1, color2, st.y * 2.0);
+  } else {
+    color = mix(color2, color3, (st.y - 0.5) * 2.0);
+  }
+  
+  gl_FragColor = vec4(color, 1.0);
 }`;

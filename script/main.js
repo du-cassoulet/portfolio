@@ -1,6 +1,5 @@
 import * as THREE from "three";
-import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
-import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+import gsap from "gsap";
 import { backgroundFragmentShader, backgroundVertexShader } from "./shader.js";
 
 {
@@ -17,7 +16,7 @@ import { backgroundFragmentShader, backgroundVertexShader } from "./shader.js";
 		100
 	);
 
-	camera.position.set(0, 0, 2.2);
+	camera.position.set(0, 1, 2);
 	camera.updateProjectionMatrix();
 
 	window.addEventListener("resize", () => {
@@ -45,10 +44,10 @@ import { backgroundFragmentShader, backgroundVertexShader } from "./shader.js";
 		u_pointsize: { value: 1.5 },
 		u_noise_freq_1: { value: 4.0 },
 		u_noise_amp_1: { value: 0.2 },
-		u_spd_modifier_1: { value: 0.5 },
+		u_spd_modifier_1: { value: 0.4 },
 		u_noise_freq_2: { value: 3.0 },
 		u_noise_amp_2: { value: 0.3 },
-		u_spd_modifier_2: { value: 0.3 },
+		u_spd_modifier_2: { value: 0.2 },
 	};
 
 	const geometry = new THREE.PlaneGeometry(16, 16, 512, 512);
@@ -65,6 +64,7 @@ import { backgroundFragmentShader, backgroundVertexShader } from "./shader.js";
 
 	const container = document.body;
 	renderer.domElement.classList.add("background");
+	renderer.domElement.classList.add("animate");
 	container.appendChild(renderer.domElement);
 
 	renderer.render(scene, camera);
@@ -81,45 +81,154 @@ import { backgroundFragmentShader, backgroundVertexShader } from "./shader.js";
 	}
 
 	animate();
+
+	document.addEventListener("scroll", (scrollState) => {
+		if (scrollState.detail === 0) {
+			gsap.to(camera.rotation, { x: 0, duration: 3 });
+			gsap.to(camera.position, { z: 2, duration: 3 });
+		} else {
+			gsap.to(camera.rotation, { x: -Math.PI * 0.25, duration: 3 });
+			gsap.to(camera.position, { z: 1.5, duration: 3 });
+		}
+	});
 }
 
 {
-	const scene = new THREE.Scene();
-	const canvas = document.querySelector("canvas.cube");
+	let scrollState = 0;
+	const maxScroll = document.querySelectorAll("article.page").length - 1;
+	const buttonUp = document.querySelector("button.scroll-up");
+	const buttonDown = document.querySelector("button.scroll-down");
+	const container = document.querySelector("section.page-container");
+	const projectsButton = document.querySelector(".projects");
+	const contactButton = document.querySelector(".contact");
+	const whoamiButton = document.querySelector(".whoami");
 
-	const renderer = new THREE.WebGLRenderer({ antialias: true, canvas: canvas });
-	renderer.setPixelRatio(window.devicePixelRatio);
-	renderer.setSize(350, 350);
-	renderer.setClearColor(0x000000, 0);
+	function scroll() {
+		const scrollHeight = scrollState * window.innerHeight;
 
-	const camera = new THREE.PerspectiveCamera(60, 1, 1, 100);
+		document.dispatchEvent(new CustomEvent("scroll", { detail: scrollState }));
 
-	camera.position.set(0, 0, 3.5);
-	camera.updateProjectionMatrix();
-
-	const controls = new OrbitControls(camera, renderer.domElement);
-
-	const loader = new GLTFLoader();
-	const gltf = await loader.loadAsync("./3d/cube/scene.gltf");
-	scene.add(gltf.scene);
-
-	const light = new THREE.DirectionalLight(0xffffff, 1);
-	light.position.set(0, 10, 0);
-	light.lookAt(0, 0, 0);
-	scene.add(light);
-
-	controls.update();
-	renderer.render(scene, camera);
-
-	function animate() {
-		requestAnimationFrame(animate);
-
-		controls.update();
-		gltf.scene.rotation.x += 0.005;
-		gltf.scene.rotation.z += 0.004;
-		gltf.scene.rotation.z += 0.002;
-		renderer.render(scene, camera);
+		container.scroll({
+			top: scrollHeight,
+			left: 0,
+			behavior: "smooth",
+		});
 	}
 
-	animate();
+	let time = 0;
+	document.addEventListener("wheel", (e) => {
+		if (Date.now() - time < 500) {
+			return;
+		}
+
+		if (e.deltaY > 0) {
+			if (scrollState < maxScroll) scrollState++;
+		} else {
+			if (scrollState > 0) scrollState--;
+		}
+
+		time = Date.now();
+		scroll();
+	});
+
+	buttonUp.addEventListener("click", () => {
+		if (scrollState > 0) scrollState--;
+		scroll();
+	});
+
+	buttonDown.addEventListener("click", () => {
+		if (scrollState < maxScroll) scrollState++;
+		scroll();
+	});
+
+	whoamiButton.addEventListener("click", () => {
+		scrollState = 1;
+		scroll();
+	});
+
+	projectsButton.addEventListener("click", () => {
+		scrollState = 2;
+		scroll();
+	});
+
+	contactButton.addEventListener("click", () => {
+		scrollState = 3;
+		scroll();
+	});
+}
+
+{
+	const Observer = new IntersectionObserver((entries) => {
+		entries.forEach((entry) => {
+			if (entry.isIntersecting) {
+				entry.target.classList.add("visible");
+			} else {
+				entry.target.classList.remove("visible");
+			}
+		});
+	});
+
+	const targets = document.querySelectorAll(".animate");
+
+	targets.forEach((target) => {
+		Observer.observe(target);
+	});
+}
+
+{
+	const cursor = document.querySelector(".cursor-ball");
+	const cursorFollower = document.querySelector(".cursor-ball-follower");
+	const clickable = document.querySelectorAll("button, a");
+	const projects = document.querySelectorAll(".project");
+
+	clickable.forEach((element) => {
+		element.addEventListener("mouseenter", () => {
+			cursor.classList.add("button-hover");
+			cursorFollower.classList.add("button-hover");
+		});
+
+		element.addEventListener("mouseleave", () => {
+			cursor.classList.remove("button-hover");
+			cursorFollower.classList.remove("button-hover");
+		});
+	});
+
+	projects.forEach((element) => {
+		if (!element.dataset.banner) return;
+
+		element.addEventListener("mouseenter", () => {
+			// cursorPreview.style.backgroundImage = `url(/${element.dataset.banner})`;
+		});
+
+		element.addEventListener("mouseleave", () => {
+			// cursorPreview.style.backgroundImage = "none";
+		});
+	});
+
+	document.addEventListener("mousemove", (e) => {
+		cursor.style.left = `${e.clientX}px`;
+		cursor.style.top = `${e.clientY}px`;
+		cursorFollower.style.left = `${e.clientX}px`;
+		cursorFollower.style.top = `${e.clientY}px`;
+	});
+
+	document.addEventListener("mousedown", () => {
+		cursorFollower.classList.add("click");
+	});
+
+	document.addEventListener("mouseup", () => {
+		cursorFollower.classList.remove("click");
+	});
+}
+
+{
+	const age = document.querySelectorAll(".age");
+	const now = new Date();
+	const birth = new Date("2006-05-17");
+	const diff = now - birth;
+	const ageInYears = Math.floor(diff / 31_557_600_000);
+
+	age.forEach((element) => {
+		element.textContent = ageInYears;
+	});
 }

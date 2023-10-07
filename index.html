@@ -3,7 +3,8 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Document</title>
+		<title>Gaston Chenet</title>
+		<link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
 		<link rel="stylesheet" href="style/main.css" />
 		<script
 			src="https://kit.fontawesome.com/79d6801984.js"
@@ -13,45 +14,124 @@
 			{
 				"imports": {
 					"three": "https://unpkg.com/three@0.157.0/build/three.module.js",
-					"three/addons/": "https://unpkg.com/three@0.157.0/examples/jsm/"
+					"three/addons/": "https://unpkg.com/three@0.157.0/examples/jsm/",
+					"gsap": "https://cdn.jsdelivr.net/npm/gsap@3.12/+esm"
 				}
 			}
 		</script>
 		<script defer async src="script/main.js" type="module"></script>
 	</head>
 	<body>
-		<button class="bottom-button">
-			<svg
-				xmlns="http://www.w3.org/2000/svg"
-				viewBox="0 0 448 512"
-				class="icon"
-			>
-				<path
-					d="M201.4 342.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 274.7 86.6 137.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"
-				/>
-			</svg>
-		</button>
+		<section class="bottom-buttons">
+			<button class="scroll-up animate">
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					viewBox="0 0 448 512"
+					class="icon"
+				>
+					<path
+						d="M201.4 137.4c12.5-12.5 32.8-12.5 45.3 0l160 160c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L224 205.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l160-160z"
+					/>
+				</svg>
+			</button>
+			<button class="scroll-down animate">
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					viewBox="0 0 448 512"
+					class="icon"
+				>
+					<path
+						d="M201.4 342.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 274.7 86.6 137.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"
+					/>
+				</svg>
+			</button>
+		</section>
 		<section class="page-container">
 			<article class="page">
 				<nav class="navbar">
+					<div class="nav-links">
+						<button class="link whoami animate">WhoAmI</button>
+						<button class="link projects animate">Projects</button>
+						<button class="link contact animate">Contact</button>
+					</div>
 					<img
 						src="./assets/avatar.jpg"
 						alt="Du Cassoulet Avatar"
-						class="avatar"
+						class="avatar animate"
 					/>
 				</nav>
-				<h1 class="page-title">
-					<img src="./assets/wave.png" alt="Waving Emoji" class="wave" />
-					<span class="hello">Hello,</span> my name is<br /><span
-						class="title-name"
-						data-content="Gaston Chenet"
-						>Gaston Chenet</span
-					>
-				</h1>
+				<div class="introduction animate">
+					<h1 class="page-title">
+						<img src="./assets/wave.png" alt="Waving Emoji" class="wave" />
+						<span class="hello">Hello,</span> my name is<br /><span
+							class="title-name"
+							data-content="Gaston Chenet"
+							>Gaston Chenet</span
+						>
+					</h1>
+					<p class="description">
+						I am a Frontend, Backend web developer
+						<span class="kw">from</span> France.<br />My mission is
+						<span class="kw">to</span> deliver the best possible user experience
+						<span class="kw">foreach</span> individuals.
+					</p>
+				</div>
 			</article>
 			<article class="page">
-				<canvas class="cube"></canvas>
+				<div class="timeline top">
+					<p class="page-label animate">
+						<span class="p">&lt;</span>WhoAmI <span class="p">/&gt;</span>
+					</p>
+					<h3 class="page-info animate">A simple introduction of myself</h3>
+				</div>
+				<pre
+					class="code-field animate"
+				><span class="line" data-line="01"><span class="kw">class</span> <span class="i">Me</span> <span class="p">{</span></span><br><span class="line" data-line="02">  <span class="kw">public</span> name <span class="p">=</span> <span class="st">"Gaston Chenet"</span><span class="p">;</span></span><br><span class="line" data-line="03">  <span class="kw">public</span> birthDate <span class="p">=</span> <span class="fu">new</span> <span class="i">Date</span><span class="p">(</span><span class="st">"2006-05-17"</span><span class="p">)</span><span class="p">;</span></span><br><span class="line" data-line="04"></span><br><span class="line" data-line="05">  <span class="fu">constructor</span><span class="p">() {};</span></span><br><span class="line" data-line="06"></span><br><span class="line" data-line="07">  <span class="kw">public</span> <span class="fu">age</span><span class="p">() {</span></span><br><span class="line" data-line="08">    <span class="kw">return</span> <span class="fu">new</span> <span class="i">Date</span><span class="p">().</span><span class="fu">getFullYear</span><span class="p">()</span> <span class="o">-</span> <span class="fu">new</span> <span class="i">Date</span><span class="p">(</span><span class="nb">this</span><span class="p">.</span>birthDate<span class="p">).</span><span class="fu">getFullYear</span><span class="p">();</span> <span class="c">// <span class="age"></span></span></span><br><span class="line" data-line="09">  <span class="p">}</span></span><br><span class="line" data-line="10"></span><br><span class="line" data-line="11">  <span class="kw">public</span> <span class="fu">languages</span><span class="p">() {</span></span><br><span class="line" data-line="12">    <span class="kw">return</span> <span class="p">[</span><span class="st">"French"</span><span class="p">,</span> <span class="st">"English"</span><span class="p">];</span></span><br><span class="line" data-line="13">  <span class="p">}</span></span><br><span class="line" data-line="14"></span><br><span class="line" data-line="15">  <span class="kw">public</span> <span class="fu">skills</span><span class="p">() {</span></span><br><span class="line" data-line="16">    <span class="kw">return</span> <span class="p">[</span></span><br><span class="line" data-line="17">      <span class="st">"Node.js/Bun"</span><span class="p">,</span> <span class="st">"TypeScript"</span><span class="p">,</span> <span class="st">"HTML"</span><span class="p">,</span> <span class="st">"Css/Sass"</span><span class="p">,</span> <span class="st">"React"</span><span class="p">,</span> <span class="st">"Next.js"</span><span class="p">,</span></span><br><span class="line" data-line="18">      <span class="st">"Python"</span><span class="p">,</span> <span class="st">"C"</span><span class="p">,</span> <span class="st">"C#"</span><span class="p">,</span> <span class="st">"GoLang"</span><span class="p">,</span> <span class="st">"Java"</span><span class="p">,</span> <span class="st">"Npm/Yarn/Bun"</span><span class="p">,</span> <span class="st">"SQL/SQLite"</span><span class="p">,</span></span><br><span class="line" data-line="19">      <span class="st">"MongoDB/FireBase"</span><span class="p">,</span><span class="st">"Git"</span><span class="p">,</span> <span class="st">"VSCode/VIM"</span><span class="p">,</span> <span class="st">"React Native"</span><span class="p">,</span> <span class="st">"Flutter"</span></span><br><span class="line" data-line="20">    <span class="p">];</span></span><br><span class="line" data-line="21">  <span class="p">}</span></span><br><span class="line" data-line="22"><span class="p">}</span></span></pre>
+			</article>
+			<article class="page">
+				<div class="timeline middle">
+					<p class="page-label animate">
+						<span class="p">&lt;</span>Projects <span class="p">/&gt;</span>
+					</p>
+					<h3 class="page-info animate">An overview of some of my projects</h3>
+				</div>
+				<ul class="project-items animate">
+					<li class="project" data-banner="assets/projects/tinygames.jpg">
+						<a class="name"
+							>Tiny Games <span class="date">Sep 24, 2022</span></a
+						>
+					</li>
+					<li class="project" data-banner="assets/projects/tinywebsite.png">
+						<a class="name"
+							>Tiny Games website <span class="date">Oct 1, 2023</span></a
+						>
+					</li>
+					<li class="project" data-banner="assets/projects/jeudemots.png">
+						<a class="name">JeuDeMots <span class="date">Aug 24, 2022</span></a>
+					</li>
+					<li class="project" data-banner="">
+						<a class="name"
+							>CassouScript <span class="date">Aug 9, 2022</span></a
+						>
+					</li>
+					<li class="project" data-banner="assets/projects/portfolio.png">
+						<a class="name">Portfolio <span class="date">Oct 6, 2023</span></a>
+					</li>
+				</ul>
+			</article>
+			<article class="page">
+				<div class="timeline bottom">
+					<p class="page-label animate">
+						<span class="p">&lt;</span>Contact <span class="p">/&gt;</span>
+					</p>
+					<h3 class="page-info animate">How to contact me</h3>
+				</div>
 			</article>
 		</section>
+		<div class="cursor">
+			<div class="cursor-ball"></div>
+			<div class="cursor-ball-follower"></div>
+			<div class="cursor-preview"></div>
+		</div>
 	</body>
 </html>
