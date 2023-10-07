@@ -216,6 +216,52 @@ body .page-container .page .code-field .line .c {
 body .page-container .page .code-field .line .nb {
   color: #fe9a43;
 }
+body .page-container .page .code-field .line .skill {
+  position: relative;
+}
+body .page-container .page .code-field .line .skill .info {
+  position: absolute;
+  background: #0d1214;
+  border: 1px solid #1b2224;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: 100ms ease;
+  pointer-events: none;
+  transform: translate(-50%, calc(-100% - 35px));
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 25px;
+  gap: 10px;
+}
+body .page-container .page .code-field .line .skill .info::before {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: #0d1214;
+  border: 1px solid #1b2224;
+  border-top: none;
+  border-left: none;
+  top: 100%;
+  left: 50%;
+  border-radius: 0 0 5px 0;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+body .page-container .page .code-field .line .skill .info .icon {
+  max-height: 20px;
+  max-width: 30px;
+}
+body .page-container .page .code-field .line .skill .info .name {
+  color: #ffffff;
+  font-size: 16px;
+}
+body .page-container .page .code-field .line .skill:hover .info {
+  opacity: 1;
+  transform: translate(-50%, calc(-100% - 15px));
+}
 body .page-container .page .project-items {
   display: flex;
   flex-direction: column;
@@ -228,6 +274,7 @@ body .page-container .page .project-items {
   transform: translateX(-50px);
   filter: blur(5px);
   transition: 1s ease;
+  position: relative;
 }
 body .page-container .page .project-items.visible {
   opacity: 1;
@@ -237,7 +284,6 @@ body .page-container .page .project-items.visible {
 body .page-container .page .project-items .project {
   color: #ffffff;
   padding-left: 20px;
-  transition: 250ms ease;
   width: fit-content;
 }
 body .page-container .page .project-items .project::before {
@@ -249,7 +295,7 @@ body .page-container .page .project-items .project::before {
   margin-left: -50px;
   transition: 250ms ease;
 }
-body .page-container .page .project-items .project:hover {
+body .page-container .page .project-items .project:hover .name {
   color: #fe435f;
 }
 body .page-container .page .project-items .project:hover::before {
@@ -258,14 +304,126 @@ body .page-container .page .project-items .project:hover::before {
 body .page-container .page .project-items .project .name {
   font-family: Consolas, monospace;
   font-size: 26px;
+  text-decoration: none;
+  color: #ffffff;
+  transition: 250ms ease;
 }
 body .page-container .page .project-items .project .date {
   font-family: Consolas, monospace;
   font-size: 16px;
   color: #727272;
 }
-body .page-container .page .project-items .project .banner {
-  display: none;
+body .page-container .page .project-items .project .preview {
+  position: absolute;
+  top: 0;
+  right: 150px;
+  opacity: 0;
+  translate: 100ms ease;
+  padding: 20px;
+  border-radius: 10px;
+  background: #0d1214;
+  border: 1px solid #1b2224;
+  transform: translateX(-100px);
+  filter: blur(5px);
+}
+body .page-container .page .project-items .project .preview .header {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #1b2224;
+}
+body .page-container .page .project-items .project .preview .header .title {
+  color: #5643fe;
+  font-size: 20px;
+  font-family: Consolas, monospace;
+}
+body .page-container .page .project-items .project .preview .header .title::before {
+  content: "<";
+  color: #727272;
+}
+body .page-container .page .project-items .project .preview .header .title::after {
+  content: " />";
+  color: #727272;
+}
+body .page-container .page .project-items .project .preview .header .description {
+  color: #727272;
+  font-size: 16px;
+  font-style: italic;
+  font-family: Consolas, monospace;
+}
+body .page-container .page .project-items .project .preview .banner {
+  width: 450px;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+body .page-container .page .project-items .project .preview .footer {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+body .page-container .page .project-items .project .preview .footer .skill-list {
+  padding-left: 25px;
+  list-style: none;
+}
+body .page-container .page .project-items .project .preview .footer .skill-list .skill {
+  font-size: 16px;
+  color: #a0a0a0;
+  font-family: Consolas, monospace;
+}
+body .page-container .page .project-items .project .preview .footer .skill-list .skill::before {
+  content: "•";
+  color: #353535;
+  font-weight: bold;
+  display: inline-block;
+  width: 1em;
+  margin-left: -25px;
+  transition: 250ms ease;
+}
+body .page-container .page .project-items .project .preview .date {
+  color: #727272;
+  font-size: 12px;
+  font-family: Consolas, monospace;
+  text-align: right;
+  width: 100%;
+}
+body .page-container .page .project-items .project:has(.name:hover) .preview {
+  opacity: 1;
+  transform: translateX(0px);
+  filter: blur(0px);
+  animation: fade-in 500ms ease;
+}
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: translateX(-100px);
+    filter: blur(5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0px);
+    filter: blur(0px);
+  }
+}
+body .page-container .page .project-items .project:has(.name:not(:hover)) .preview {
+  opacity: 0;
+  transform: translateX(-100px);
+  filter: blur(5px);
+  animation: fade-out 500ms ease;
+}
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+    transform: translateX(0px);
+    filter: blur(0px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-100px);
+    filter: blur(5px);
+  }
 }
 body .page-container .page .timeline {
   width: 1px;
@@ -329,7 +487,7 @@ body .page-container .page .timeline .page-info {
   width: fit-content;
   white-space: nowrap;
   margin: 10px 25px;
-  font-size: 25px;
+  font-size: 30px;
   opacity: 0;
   transform: translateX(-50px);
   filter: blur(5px);
@@ -374,7 +532,7 @@ body .page-container .page .navbar .nav-links .link {
   opacity: 0;
   transform: translatey(-50px);
   filter: blur(5px);
-  transition: 500ms ease;
+  transition: 250ms ease;
 }
 body .page-container .page .navbar .nav-links .link.visible {
   opacity: 1;
@@ -388,6 +546,9 @@ body .page-container .page .navbar .nav-links .link::before {
 body .page-container .page .navbar .nav-links .link::after {
   content: " />";
   color: #727272;
+}
+body .page-container .page .navbar .nav-links .link:hover {
+  color: #5643fe;
 }
 body .page-container .page .navbar .avatar {
   width: 40px;
