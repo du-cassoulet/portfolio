@@ -307,8 +307,15 @@ body {
 				filter: blur(5px);
 				transition: 1s ease;
 
-				@media screen and (max-width: $mobile-width) {
+				@media screen and (max-width: 1500px) {
+					margin-left: 175px;
+				}
+
+				@media screen and (max-width: 1210px) {
 					margin-left: 50px;
+				}
+
+				@media screen and (max-width: $mobile-width) {
 					padding: 10px;
 					width: calc(100dvw - 75px);
 					margin-top: 200px;
@@ -382,9 +389,16 @@ body {
 				filter: blur(5px);
 				transition: 1s ease;
 				font-size: 20px;
+				scrollbar-width: none;
+
+				&::-webkit-scrollbar {
+					display: none;
+				}
 
 				@media screen and (max-width: 1500px) {
 					margin-left: 175px;
+					width: calc(100dvw - 225px);
+					overflow-x: auto;
 				}
 
 				@media screen and (max-width: 1210px) {
@@ -398,7 +412,6 @@ body {
 				@media screen and (max-width: $mobile-width) {
 					padding: 10px;
 					width: calc(100dvw - 75px);
-					overflow-x: auto;
 					margin-top: 230px;
 				}
 
@@ -516,7 +529,7 @@ body {
 
 			.project-items {
 				display: grid;
-				grid-template-columns: repeat(3, 1fr);
+				grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
 				margin-top: 275px;
 				margin-left: 350px;
 				z-index: 999;
