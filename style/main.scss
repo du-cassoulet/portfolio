@@ -870,6 +870,7 @@ body {
 
 					@media screen and (max-width: $mobile-width) {
 						width: calc(100dvw - 25px * 3);
+						font-size: 20px;
 					}
 
 					&.visible {

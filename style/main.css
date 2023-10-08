@@ -912,6 +912,7 @@ body .page-container .page .timeline .page-info {
   html .page-container .page .timeline .page-info,
   body .page-container .page .timeline .page-info {
     width: calc(100dvw - 75px);
+    font-size: 20px;
   }
 }
 html .page-container .page .timeline .page-info.visible,
