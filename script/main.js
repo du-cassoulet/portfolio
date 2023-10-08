@@ -41,7 +41,7 @@ import { backgroundFragmentShader, backgroundVertexShader } from "./shader.js";
 				y: window.innerHeight * window.devicePixelRatio,
 			},
 		},
-		u_pointsize: { value: 1.5 },
+		u_pointsize: { value: 1 },
 		u_noise_freq_1: { value: 4.0 },
 		u_noise_amp_1: { value: 0.2 },
 		u_spd_modifier_1: { value: 0.4 },
@@ -83,12 +83,66 @@ import { backgroundFragmentShader, backgroundVertexShader } from "./shader.js";
 	animate();
 
 	document.addEventListener("scroll", (scrollState) => {
-		if (scrollState.detail === 0) {
-			gsap.to(camera.rotation, { x: 0, duration: 3 });
-			gsap.to(camera.position, { z: 2, duration: 3 });
-		} else {
-			gsap.to(camera.rotation, { x: -Math.PI * 0.25, duration: 3 });
-			gsap.to(camera.position, { z: 1.5, duration: 3 });
+		switch (scrollState.detail) {
+			case 0:
+				gsap.to(camera.rotation, {
+					x: 0,
+					y: 0,
+					z: 0,
+					duration: 3,
+				});
+
+				gsap.to(camera.position, {
+					z: 2,
+					duration: 3,
+				});
+
+				break;
+
+			case 1:
+				gsap.to(camera.rotation, {
+					x: -Math.PI * 0.25,
+					y: 0,
+					z: 0,
+					duration: 3,
+				});
+
+				gsap.to(camera.position, {
+					z: 1.5,
+					duration: 3,
+				});
+
+				break;
+
+			case 2:
+				gsap.to(camera.rotation, {
+					x: -Math.PI * 0.25,
+					y: -Math.PI * 0.15,
+					z: -Math.PI * 0.2,
+					duration: 3,
+				});
+
+				gsap.to(camera.position, {
+					z: 1.5,
+					duration: 3,
+				});
+
+				break;
+
+			case 3:
+				gsap.to(camera.rotation, {
+					x: -Math.PI * 0.25,
+					y: 0,
+					z: 0,
+					duration: 3,
+				});
+
+				gsap.to(camera.position, {
+					z: 3,
+					duration: 5,
+				});
+
+				break;
 		}
 	});
 }
@@ -116,6 +170,7 @@ import { backgroundFragmentShader, backgroundVertexShader } from "./shader.js";
 	}
 
 	let time = 0;
+
 	document.addEventListener("wheel", (e) => {
 		if (Date.now() - time < 500) {
 			return;
@@ -178,8 +233,7 @@ import { backgroundFragmentShader, backgroundVertexShader } from "./shader.js";
 {
 	const cursor = document.querySelector(".cursor-ball");
 	const cursorFollower = document.querySelector(".cursor-ball-follower");
-	const clickable = document.querySelectorAll("button, a");
-	const projects = document.querySelectorAll(".project");
+	const clickable = document.querySelectorAll("button, a, input, textarea");
 
 	clickable.forEach((element) => {
 		element.addEventListener("mouseenter", () => {
@@ -190,18 +244,6 @@ import { backgroundFragmentShader, backgroundVertexShader } from "./shader.js";
 		element.addEventListener("mouseleave", () => {
 			cursor.classList.remove("button-hover");
 			cursorFollower.classList.remove("button-hover");
-		});
-	});
-
-	projects.forEach((element) => {
-		if (!element.dataset.banner) return;
-
-		element.addEventListener("mouseenter", () => {
-			// cursorPreview.style.backgroundImage = `url(/${element.dataset.banner})`;
-		});
-
-		element.addEventListener("mouseleave", () => {
-			// cursorPreview.style.backgroundImage = "none";
 		});
 	});
 
