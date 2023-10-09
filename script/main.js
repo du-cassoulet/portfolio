@@ -312,7 +312,7 @@ import { backgroundFragmentShader, backgroundVertexShader } from "./shader.js";
 	const char = () =>
 		glitchChars[Math.floor(Math.random() * glitchChars.length)];
 
-	const expected = `${FIRST_NAME} ${LAST_NAME}`;
+	const expected = FIRST_NAME + " " + LAST_NAME;
 	let glitched = "";
 
 	for (let i = 0; i < expected.length; i++) {
@@ -326,6 +326,7 @@ import { backgroundFragmentShader, backgroundVertexShader } from "./shader.js";
 	const interval = setInterval(() => {
 		idx += 0.25;
 		let glitched = expected.slice(0, idx);
+		console.log(glitched);
 
 		for (let i = 0; i < expected.length - idx; i++) {
 			glitched += char();
