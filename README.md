@@ -15,7 +15,7 @@ _A list of util commands to make the website run properly._
 ### Install corrsponding modules
 
 ```bash
-npm install --g sass jsmin
+npm install --g sass uglify-js
 ```
 
 ### Compile sass
@@ -27,5 +27,5 @@ sass style/main.scss:style/main.min.css --style compressed --watch
 ### Minify js
 
 ```bash
-jsmin -o script/main.min.js script/main.js
+uglifyjs script/main.js --compress --mangle --output script/main.min.js
 ```
