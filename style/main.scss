@@ -1089,7 +1089,9 @@ body {
 						}
 
 						&::before {
+							font-size: 7dvw;
 							content: attr(data-content);
+							font-family: "Paytone One", sans-serif;
 							position: absolute;
 							top: 15px;
 							left: -10px;
@@ -1098,11 +1100,14 @@ body {
 							@media screen and (max-width: $mobile-width) {
 								left: -5px;
 								top: 10px;
+								font-size: 11dvw;
 							}
 						}
 
 						&::after {
+							font-size: 7dvw;
 							content: attr(data-content);
+							font-family: "Paytone One", sans-serif;
 							position: absolute;
 							top: 20px;
 							left: -5px;
@@ -1111,6 +1116,7 @@ body {
 							@media screen and (max-width: $mobile-width) {
 								left: -10px;
 								top: 15px;
+								font-size: 11dvw;
 							}
 						}
 					}
