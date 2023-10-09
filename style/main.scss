@@ -1129,14 +1129,9 @@ body {
 					filter: blur(5px);
 					transition: 1s ease;
 
-					&.visible {
-						opacity: 1;
-						transform: translateX(0px);
-						filter: blur(0px);
-					}
-
 					@media screen and (max-width: 1160px) {
 						font-size: 16px;
+						transform: translateX(-100px);
 					}
 
 					@media screen and (max-width: 1040px) {
@@ -1146,6 +1141,13 @@ body {
 					@media screen and (max-width: $mobile-width) {
 						margin: 50px;
 						max-width: calc(100dvw - 50px * 2);
+						transform: translateX(-50px);
+					}
+
+					&.visible {
+						opacity: 1;
+						transform: translateX(0px);
+						filter: blur(0px);
 					}
 
 					.kw {
