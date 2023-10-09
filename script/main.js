@@ -1,10 +1,6 @@
 import * as THREE from "three";
 import gsap from "gsap";
-
-import {
-	backgroundFragmentShader,
-	backgroundVertexShader,
-} from "./shader.min.js";
+import { backgroundFragmentShader, backgroundVertexShader } from "./shader.js";
 
 {
 	const scene = new THREE.Scene();

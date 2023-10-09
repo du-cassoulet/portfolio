@@ -28,5 +28,4 @@ sass style/main.scss:style/main.min.css --style compressed --watch
 
 ```bash
 jsmin -o script/main.min.js script/main.js
-jsmin -o script/shader.min.js script/shader.js
 ```
