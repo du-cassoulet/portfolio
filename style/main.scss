@@ -364,6 +364,10 @@ body {
 						color: $gray;
 						font-size: 16px;
 						font-style: italic;
+
+						@media screen and (max-width: $mobile-width) {
+							font-size: 14px;
+						}
 					}
 
 					&.href:hover .name {
@@ -382,7 +386,6 @@ body {
 				line-height: 1.275;
 				width: fit-content;
 				border: 1px solid #1b2224;
-				padding: 25px;
 				border-radius: 10px;
 				opacity: 0;
 				transform: translateX(-50px);
@@ -390,6 +393,10 @@ body {
 				transition: 1s ease;
 				font-size: 20px;
 				scrollbar-width: none;
+				display: flex;
+				flex-direction: column;
+				overflow: hidden;
+				padding: 25px 0;
 
 				&::-webkit-scrollbar {
 					display: none;
@@ -410,7 +417,7 @@ body {
 				}
 
 				@media screen and (max-width: $mobile-width) {
-					padding: 10px;
+					padding: 10px 0;
 					width: calc(100dvw - 75px);
 					margin-top: 250px;
 				}
@@ -426,6 +433,18 @@ body {
 				}
 
 				.line {
+					background: #ffffff00;
+					width: 100%;
+					padding: 0 25px;
+
+					@media screen and (max-width: $mobile-width) {
+						padding: 0 10px;
+					}
+
+					&:hover {
+						background: #ffffff10;
+					}
+
 					&::before {
 						content: attr(data-line);
 						display: inline-block;
@@ -469,8 +488,33 @@ body {
 						color: $dark-gray;
 					}
 
+					.s {
+						color: #ffffff10;
+						user-select: none;
+					}
+
 					.nb {
 						color: $orange;
+					}
+
+					.lexer {
+						color: $light-gray;
+						animation: blink 1s infinite;
+						user-select: none;
+
+						@keyframes blink {
+							0% {
+								opacity: 0;
+							}
+
+							50% {
+								opacity: 1;
+							}
+
+							100% {
+								opacity: 0;
+							}
+						}
 					}
 
 					.skill {
@@ -617,7 +661,11 @@ body {
 					.date {
 						font-family: Consolas, monospace;
 						font-size: 16px;
-						color: #727272;
+						color: $gray;
+
+						@media screen and (max-width: $mobile-width) {
+							font-size: 12px;
+						}
 					}
 
 					.preview {
@@ -630,7 +678,7 @@ body {
 						border-radius: 10px;
 						background: #0d1214;
 						border: 1px solid #1b2224;
-						transform: translate(100%);
+						transform: translate(-150px, -25%) scale(0.5);
 						filter: blur(5px);
 						pointer-events: none;
 						z-index: 999;
@@ -716,20 +764,20 @@ body {
 
 					&:has(.name:hover) .preview {
 						opacity: 1;
-						transform: translateX(0);
+						transform: translateX(0) scale(1);
 						filter: blur(0px);
 						animation: fade-in 500ms ease;
 
 						@keyframes fade-in {
 							0% {
 								opacity: 0;
-								transform: translateX(-100px);
+								transform: translate(-150px, -25%) scale(0.5);
 								filter: blur(5px);
 							}
 
 							100% {
 								opacity: 1;
-								transform: translateX(0);
+								transform: translate(0, 0) scale(1);
 								filter: blur(0px);
 							}
 						}
@@ -737,20 +785,20 @@ body {
 
 					&:has(.name:not(:hover)) .preview {
 						opacity: 0;
-						transform: translateX(-100px);
+						transform: translate(-150px, -25%) scale(0.5);
 						filter: blur(5px);
 						animation: fade-out 500ms ease;
 
 						@keyframes fade-out {
 							0% {
 								opacity: 1;
-								transform: translateX(0);
+								transform: translate(0, 0) scale(1);
 								filter: blur(0px);
 							}
 
 							100% {
 								opacity: 0;
-								transform: translateX(-100px);
+								transform: translate(-150px, -25%) scale(0.5);
 								filter: blur(5px);
 							}
 						}
@@ -1066,9 +1114,19 @@ body {
 					font-weight: 500;
 					color: $white;
 					line-height: 1.5;
-					max-width: 650px;
 					font-family: Consolas, monospace;
 					margin-left: 25px;
+					max-width: 650px;
+					opacity: 0;
+					transform: translateX(-250px);
+					filter: blur(5px);
+					transition: 1s ease;
+
+					&.visible {
+						opacity: 1;
+						transform: translateX(0px);
+						filter: blur(0px);
+					}
 
 					@media screen and (max-width: 1160px) {
 						font-size: 16px;
@@ -1079,8 +1137,8 @@ body {
 					}
 
 					@media screen and (max-width: $mobile-width) {
-						max-width: calc(100dvw - 50px * 2);
 						margin: 50px;
+						max-width: calc(100dvw - 50px * 2);
 					}
 
 					.kw {

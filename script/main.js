@@ -41,9 +41,9 @@ import { backgroundFragmentShader, backgroundVertexShader } from "./shader.js";
 				y: window.innerHeight * window.devicePixelRatio,
 			},
 		},
-		u_pointsize: { value: 1 },
+		u_pointsize: { value: 1.2 },
 		u_noise_freq_1: { value: 4.0 },
-		u_noise_amp_1: { value: 0.2 },
+		u_noise_amp_1: { value: 0.4 },
 		u_spd_modifier_1: { value: 0.4 },
 		u_noise_freq_2: { value: 3.0 },
 		u_noise_amp_2: { value: 0.3 },
@@ -264,13 +264,77 @@ import { backgroundFragmentShader, backgroundVertexShader } from "./shader.js";
 }
 
 {
+	const FIRST_NAME = "Gaston";
+	const LAST_NAME = "Chenet";
+	const BIRTH_DATE = "2006-05-17";
+
 	const age = document.querySelectorAll(".age");
 	const now = new Date();
-	const birth = new Date("2006-05-17");
+	const birth = new Date(BIRTH_DATE);
 	const diff = now - birth;
 	const ageInYears = Math.floor(diff / 31_557_600_000);
 
 	age.forEach((element) => {
 		element.textContent = ageInYears;
 	});
+
+	const bigName = document.querySelector(".big-name");
+	const glitchChars = Object.freeze([
+		"*",
+		"!",
+		"?",
+		"#",
+		"$",
+		"%",
+		"&",
+		"@",
+		"+",
+		"=",
+		"-",
+		"_",
+		"(",
+		")",
+		"[",
+		"]",
+		"{",
+		"}",
+		"<",
+		">",
+		"~",
+		"^",
+		":",
+		";",
+		"|",
+		"/",
+		"\\",
+	]);
+
+	const char = () =>
+		glitchChars[Math.floor(Math.random() * glitchChars.length)];
+
+	const expected = `${FIRST_NAME} ${LAST_NAME}`;
+	let glitched = "";
+
+	for (let i = 0; i < expected.length; i++) {
+		glitched += char();
+	}
+
+	let idx = 0;
+	bigName.textContent = glitched;
+	bigName.dataset.content = glitched;
+
+	const interval = setInterval(() => {
+		idx += 0.25;
+		let glitched = expected.slice(0, idx);
+
+		for (let i = 0; i < expected.length - idx; i++) {
+			glitched += char();
+		}
+
+		bigName.textContent = glitched;
+		bigName.dataset.content = glitched;
+
+		if (idx < expected.length) return;
+		return clearInterval(interval);
+	}, 25);
 }

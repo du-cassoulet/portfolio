@@ -390,6 +390,12 @@ body .page-container .page .contact-container .link .username {
   font-size: 16px;
   font-style: italic;
 }
+@media screen and (max-width: 768px) {
+  html .page-container .page .contact-container .link .username,
+  body .page-container .page .contact-container .link .username {
+    font-size: 14px;
+  }
+}
 html .page-container .page .contact-container .link.href:hover .name,
 body .page-container .page .contact-container .link.href:hover .name {
   color: #fe435f;
@@ -405,7 +411,6 @@ body .page-container .page .code-field {
   line-height: 1.275;
   width: fit-content;
   border: 1px solid #1b2224;
-  padding: 25px;
   border-radius: 10px;
   opacity: 0;
   transform: translateX(-50px);
@@ -413,6 +418,10 @@ body .page-container .page .code-field {
   transition: 1s ease;
   font-size: 20px;
   scrollbar-width: none;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 25px 0;
 }
 html .page-container .page .code-field::-webkit-scrollbar,
 body .page-container .page .code-field::-webkit-scrollbar {
@@ -441,7 +450,7 @@ body .page-container .page .code-field::-webkit-scrollbar {
 @media screen and (max-width: 768px) {
   html .page-container .page .code-field,
   body .page-container .page .code-field {
-    padding: 10px;
+    padding: 10px 0;
     width: calc(100dvw - 75px);
     margin-top: 250px;
   }
@@ -455,6 +464,22 @@ body .page-container .page .code-field.visible {
 html .page-container .page .code-field *,
 body .page-container .page .code-field * {
   font-family: Consolas, monospace;
+}
+html .page-container .page .code-field .line,
+body .page-container .page .code-field .line {
+  background: rgba(255, 255, 255, 0);
+  width: 100%;
+  padding: 0 25px;
+}
+@media screen and (max-width: 768px) {
+  html .page-container .page .code-field .line,
+  body .page-container .page .code-field .line {
+    padding: 0 10px;
+  }
+}
+html .page-container .page .code-field .line:hover,
+body .page-container .page .code-field .line:hover {
+  background: rgba(255, 255, 255, 0.062745098);
 }
 html .page-container .page .code-field .line::before,
 body .page-container .page .code-field .line::before {
@@ -502,9 +527,31 @@ html .page-container .page .code-field .line .c,
 body .page-container .page .code-field .line .c {
   color: #353535;
 }
+html .page-container .page .code-field .line .s,
+body .page-container .page .code-field .line .s {
+  color: rgba(255, 255, 255, 0.062745098);
+  user-select: none;
+}
 html .page-container .page .code-field .line .nb,
 body .page-container .page .code-field .line .nb {
   color: #fe9a43;
+}
+html .page-container .page .code-field .line .lexer,
+body .page-container .page .code-field .line .lexer {
+  color: #a0a0a0;
+  animation: blink 1s infinite;
+  user-select: none;
+}
+@keyframes blink {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 html .page-container .page .code-field .line .skill,
 body .page-container .page .code-field .line .skill {
@@ -661,6 +708,12 @@ body .page-container .page .project-items .project .date {
   font-size: 16px;
   color: #727272;
 }
+@media screen and (max-width: 768px) {
+  html .page-container .page .project-items .project .date,
+  body .page-container .page .project-items .project .date {
+    font-size: 12px;
+  }
+}
 html .page-container .page .project-items .project .preview,
 body .page-container .page .project-items .project .preview {
   position: absolute;
@@ -672,7 +725,7 @@ body .page-container .page .project-items .project .preview {
   border-radius: 10px;
   background: #0d1214;
   border: 1px solid #1b2224;
-  transform: translate(100%);
+  transform: translate(-150px, -25%) scale(0.5);
   filter: blur(5px);
   pointer-events: none;
   z-index: 999;
@@ -760,38 +813,38 @@ body .page-container .page .project-items .project .preview .date {
 html .page-container .page .project-items .project:has(.name:hover) .preview,
 body .page-container .page .project-items .project:has(.name:hover) .preview {
   opacity: 1;
-  transform: translateX(0);
+  transform: translateX(0) scale(1);
   filter: blur(0px);
   animation: fade-in 500ms ease;
 }
 @keyframes fade-in {
   0% {
     opacity: 0;
-    transform: translateX(-100px);
+    transform: translate(-150px, -25%) scale(0.5);
     filter: blur(5px);
   }
   100% {
     opacity: 1;
-    transform: translateX(0);
+    transform: translate(0, 0) scale(1);
     filter: blur(0px);
   }
 }
 html .page-container .page .project-items .project:has(.name:not(:hover)) .preview,
 body .page-container .page .project-items .project:has(.name:not(:hover)) .preview {
   opacity: 0;
-  transform: translateX(-100px);
+  transform: translate(-150px, -25%) scale(0.5);
   filter: blur(5px);
   animation: fade-out 500ms ease;
 }
 @keyframes fade-out {
   0% {
     opacity: 1;
-    transform: translateX(0);
+    transform: translate(0, 0) scale(1);
     filter: blur(0px);
   }
   100% {
     opacity: 0;
-    transform: translateX(-100px);
+    transform: translate(-150px, -25%) scale(0.5);
     filter: blur(5px);
   }
 }
@@ -1123,9 +1176,19 @@ body .page-container .page .introduction .description {
   font-weight: 500;
   color: #ffffff;
   line-height: 1.5;
-  max-width: 650px;
   font-family: Consolas, monospace;
   margin-left: 25px;
+  max-width: 650px;
+  opacity: 0;
+  transform: translateX(-250px);
+  filter: blur(5px);
+  transition: 1s ease;
+}
+html .page-container .page .introduction .description.visible,
+body .page-container .page .introduction .description.visible {
+  opacity: 1;
+  transform: translateX(0px);
+  filter: blur(0px);
 }
 @media screen and (max-width: 1160px) {
   html .page-container .page .introduction .description,
@@ -1142,8 +1205,8 @@ body .page-container .page .introduction .description {
 @media screen and (max-width: 768px) {
   html .page-container .page .introduction .description,
   body .page-container .page .introduction .description {
-    max-width: calc(100dvw - 100px);
     margin: 50px;
+    max-width: calc(100dvw - 100px);
   }
 }
 html .page-container .page .introduction .description .kw,
