@@ -412,6 +412,10 @@ body {
 					margin-left: 50px;
 				}
 
+				@media screen and (max-height: 740px) {
+					font-size: 16px;
+				}
+
 				@media screen and (max-width: 1085px) {
 					font-size: 16px;
 				}
@@ -1015,8 +1019,11 @@ body {
 				gap: 25px;
 				opacity: 0;
 
+				@media screen and (max-height: 740px) {
+					margin: 100px 200px;
+				}
+
 				@media screen and (max-width: 1240px) {
-					margin: 150px 200px;
 				}
 
 				@media screen and (max-width: 880px) {
@@ -1070,7 +1077,7 @@ body {
 					}
 
 					.title-name {
-						font-size: 8dvw;
+						font-size: 7dvw;
 						font-family: "Paytone One", sans-serif;
 						line-height: 1.1;
 						position: relative;
